@@ -1,5 +1,8 @@
 package ml.windleaf.api.logging.format;
 
+import ml.windleaf.api.utils.ChatColorUtil;
+import org.bukkit.ChatColor;
+
 public enum Separator {
     EMPTY(" "),
     HYPHEN(" - "),
@@ -8,8 +11,8 @@ public enum Separator {
     TRI_ARROW(" >>> "),
     ;
 
-    public final String content;
-    public final Boolean bold;
+    private final String content;
+    private final Boolean bold;
 
     Separator(String content) {
         this.content = content;
@@ -19,5 +22,11 @@ public enum Separator {
     Separator(String content, Boolean bold) {
         this.content = content;
         this.bold = bold;
+    }
+
+    public String getContent() {
+        return this.bold
+                ? ChatColorUtil.getTextColored(this.content, ChatColor.BOLD)
+                : this.content;
     }
 }

@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a99e887-b458-436f-bdd3-5763bd55eefb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ml/windleaf/api/utils/ChatColorUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ml/windleaf/api/logging/format/NameFormat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ml/windleaf/api/logging/format/NameFormat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ml/windleaf/api/logging/format/Separator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ml/windleaf/api/logging/format/Separator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +61,7 @@
       <option name="presentableId" value="Default" />
       <updated>1656897654818</updated>
       <workItem from="1656897660504" duration="6831000" />
-      <workItem from="1656919282500" duration="1725000" />
+      <workItem from="1656919282500" duration="1912000" />
     </task>
     <servers />
   </component>
