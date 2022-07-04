@@ -24,7 +24,7 @@ public class PluginLogger {
     }
 
     public void logConsole(Object... any) {
-        StringBuilder sb = new StringBuilder("");
+        StringBuilder sb = new StringBuilder();
         Arrays.stream(any).map(Object::toString).map(str -> sb.append(" %s ".formatted(str)));
         Bukkit.getConsoleSender().sendMessage("%s%s%s".formatted(
                 this.nameFormat.getContent().formatted(this.name),
