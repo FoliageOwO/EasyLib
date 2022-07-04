@@ -25,7 +25,11 @@ public class PluginLogger {
 
     public void logConsole(Object... any) {
         StringBuilder sb = new StringBuilder("");
-        Arrays.stream(any).map(Object::toString).map(str -> sb.append(" ").append(str).append(" "));
-        Bukkit.getConsoleSender().sendMessage(sb.toString());
+        Arrays.stream(any).map(Object::toString).map(str -> sb.append(" {} ".formatted(str)));
+        Bukkit.getConsoleSender().sendMessage("{}{}{}".formatted(
+                this.nameFormat.getContent().formatted(this.name),
+                this.separator.getContent(),
+                sb.toString().trim())
+        );
     }
 }

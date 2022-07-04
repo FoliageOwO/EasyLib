@@ -22,6 +22,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -60,7 +61,7 @@
       <option name="presentableId" value="Default" />
       <updated>1656897654818</updated>
       <workItem from="1656897660504" duration="6831000" />
-      <workItem from="1656919282500" duration="3407000" />
+      <workItem from="1656919282500" duration="4386000" />
     </task>
     <servers />
   </component>
