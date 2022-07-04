@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a99e887-b458-436f-bdd3-5763bd55eefb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ml/windleaf/api/logging/format/NameFormat.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ml/windleaf/api/logging/PluginLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ml/windleaf/api/logging/PluginLogger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ml/windleaf/api/logging/format/NameFormat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ml/windleaf/api/logging/format/NameFormat.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +59,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1656897654818</updated>
-      <workItem from="1656897660504" duration="5840000" />
+      <workItem from="1656897660504" duration="6780000" />
     </task>
     <servers />
   </component>
