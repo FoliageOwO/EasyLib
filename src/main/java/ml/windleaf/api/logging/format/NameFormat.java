@@ -4,8 +4,8 @@ import ml.windleaf.api.utils.ChatColorUtil;
 import org.bukkit.ChatColor;
 
 public enum NameFormat {
-    EMPTY("{}"),
-    SQUARE_BRACKETS("[{}]"),
+    EMPTY("%s"),
+    SQUARE_BRACKETS("[%s]"),
     ;
 
     private final String content;
