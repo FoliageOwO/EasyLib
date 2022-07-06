@@ -32,7 +32,9 @@ public class PluginLogger {
 
     public void logConsole(Object... any) {
         StringBuilder sb = new StringBuilder();
-        Arrays.stream(any).map(Object::toString).map(str -> sb.append(" %s ".formatted(str)));
+        for (Object anyObject : any) {
+            sb.append(" %s ".formatted(anyObject.toString()));
+        }
         Bukkit.getConsoleSender().sendMessage("%s%s%s".formatted(
                 this.nameFormat.getContent().formatted(ChatColorUtil.getTextColored(this.name, ChatColorUtil.getReverseColor(this.color))),
                 this.separator.getContent(),
