@@ -2,7 +2,9 @@ package ml.windleaf.api.logging;
 
 import ml.windleaf.api.logging.format.NameFormat;
 import ml.windleaf.api.logging.format.Separator;
+import ml.windleaf.api.utils.ChatColorUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 
 import java.util.Arrays;
 
@@ -10,6 +12,7 @@ public class PluginLogger {
     private final String name;
     private final NameFormat nameFormat;
     private final Separator separator;
+    private ChatColor color = ChatColor.WHITE;
 
     public PluginLogger(String name) {
         this.name = name;
@@ -23,11 +26,15 @@ public class PluginLogger {
         this.separator = separator;
     }
 
+    public void setLoggerColor(ChatColor color) {
+        this.color = color;
+    }
+
     public void logConsole(Object... any) {
         StringBuilder sb = new StringBuilder();
         Arrays.stream(any).map(Object::toString).map(str -> sb.append(" %s ".formatted(str)));
         Bukkit.getConsoleSender().sendMessage("%s%s%s".formatted(
-                this.nameFormat.getContent().formatted(this.name),
+                this.nameFormat.getContent().formatted(ChatColorUtil.getTextColored(this.name, ChatColorUtil.getReverseColor(this.color))),
                 this.separator.getContent(),
                 sb.toString().trim())
         );
