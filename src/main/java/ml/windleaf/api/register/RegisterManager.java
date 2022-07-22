@@ -8,13 +8,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
 
-public class RegisterManager {
-    private final JavaPlugin plugin;
+public record RegisterManager(JavaPlugin plugin) {
     private static final PluginLogger logger = new PluginLogger("PlugApi");
-
-    public RegisterManager(JavaPlugin plugin) {
-        this.plugin = plugin;
-    }
 
     public void register(Listener listener) {
         logger.logConsole("Registering listener => %s".formatted(listener.getClass().getSimpleName()));
