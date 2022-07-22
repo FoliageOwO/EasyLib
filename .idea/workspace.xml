@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a99e887-b458-436f-bdd3-5763bd55eefb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ml/windleaf/api/core/ICommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ml/windleaf/api/core/IListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ml/windleaf/api/register/RegisterManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ml/windleaf/api/register/RegisterManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +63,7 @@
       <workItem from="1657558396326" duration="257000" />
       <workItem from="1658473072514" duration="451000" />
       <workItem from="1658474045313" duration="3846000" />
-      <workItem from="1658481930676" duration="2545000" />
+      <workItem from="1658481930676" duration="3303000" />
     </task>
     <servers />
   </component>
