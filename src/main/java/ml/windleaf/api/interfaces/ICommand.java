@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface ICommand {
     String command();
-    boolean onCommand(@NotNull CommandSender sender, @NotNull List<String> args);
+    void onCommand(@NotNull CommandSender sender, @NotNull List<String> args);
 }

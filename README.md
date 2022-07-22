@@ -54,10 +54,8 @@ public class TestCommand implements ICommand {
 
     // we have simplified the `onCommand` method
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull List<String> args) {
+    public void onCommand(@NotNull CommandSender sender, @NotNull List<String> args) {
         // do something...
-        // do not forget to return a boolean value
-        return true;
     }
 }
 ```
