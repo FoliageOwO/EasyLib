@@ -1,6 +1,5 @@
 plugins {
     id("java")
-    id("maven-publish")
 }
 
 group = "ml.windleaf"
@@ -8,7 +7,6 @@ version = "1.0.0"
 
 repositories {
     mavenCentral()
-    maven("https://www.jitpack.io")
     maven("https://repo.papermc.io/repository/maven-public/")
 }
 
@@ -17,20 +15,8 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
 
     implementation("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
-    implementation("com.github.WindLeaf233:PlugApi:master-SNAPSHOT")
 }
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
-}
-
-configure<PublishingExtension> {
-    publications {
-        create<MavenPublication>("maven") {
-            groupId = group as String
-            artifactId = "PlugApi"
-            version = version
-            from(components["java"])
-        }
-    }
 }
