@@ -1,8 +1,6 @@
 package ml.windleaf.api.utils;
 
-import java.security.KeyPair;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ColoredTextUtil {
