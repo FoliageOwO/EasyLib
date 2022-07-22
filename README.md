@@ -125,6 +125,7 @@ public class Cat implements Animal {
 
 ResolverUtil<Animal> ru = new ResolverUtil();
 // `packagePath` in the parameters means `the package path of your plugin`, such as below
+// this list will contains the class `Cat`
 List<Class<? extends Animal>> classList = ru.getClassesBySuperclass("ml.windleaf.test");
 // you can use for loop to get new instance
 for (Class<? extends Animal> cls : classList) {
