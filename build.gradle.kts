@@ -45,3 +45,14 @@ allprojects {
         }
     }
 }
+
+publishing {
+    publications {
+        create("maven_public", MavenPublication::class) {
+            groupId = "ml.windleaf"
+            artifactId = "PlugApi"
+            version = version
+            from(components.getByName("java"))
+        }
+    }
+}
