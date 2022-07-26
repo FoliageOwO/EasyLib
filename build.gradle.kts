@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("maven-publish")
 }
 
 group = "ml.windleaf"
@@ -20,4 +21,27 @@ dependencies {
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
+}
+
+allprojects {
+    apply(plugin = "java")
+    apply(plugin = "java-library")
+    apply(plugin = "maven-publish")
+
+    repositories {
+        mavenCentral()
+        maven("https://jitpack.io")
+    }
+
+    dependencies {
+        compileOnly("org.jetbrains:annotations:23.0.0")
+        compileOnly("org.apache.maven:maven-artifact:3.8.5")
+    }
+
+    tasks {
+        compileJava {
+            dependsOn(clean)
+            options.encoding = "UTF-8"
+        }
+    }
 }
