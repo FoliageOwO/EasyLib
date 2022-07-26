@@ -11,6 +11,23 @@ An API Library For Minecraft Plugins
 
 ---
 
+## Uses
+### Gradle
+1. Add `jitpack` repositories
+```groovy
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+```
+2. Add dependency
+
+**The `Tag` should be replaced by the latest version tag, such as `1.0.0`**
+```groovy
+dependencies {
+    implementation 'com.github.WindLeaf233:PlugApi:Tag'
+}
+```
+
 ## Usages
 ### Logging
 1. Import `PluginLogger` from `ml.windleaf.api.logging`
