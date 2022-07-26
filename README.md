@@ -1,4 +1,12 @@
 # PlugApi
+[![Release](https://jitpack.io/v/WindLeaf233/PlugApi.svg)](https://jitpack.io/#WindLeaf233/PlugApi)
+![Build](https://img.shields.io/github/workflow/status/WindLeaf233/PlugApi/Java%20CI%20with%20Gradle)
+![Commit](https://img.shields.io/github/last-commit/WindLeaf233/PlugApi)
+
+![Size](https://img.shields.io/github/repo-size/WindLeaf233/PlugApi)
+[![License](https://img.shields.io/github/license/WindLeaf233/PlugApi)](https://choosealicense.com/licenses/gpl-3.0/)
+
+
 An API Library For Minecraft Plugins
 
 ---
