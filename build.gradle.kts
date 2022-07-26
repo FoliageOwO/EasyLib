@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "ml.windleaf"
-version = "1.0.0"
+version = "1.0.0-fix"
 
 repositories {
     mavenCentral()
