@@ -21,7 +21,8 @@ repositories {
 ```
 2. Add dependency
 
-**The `Tag` should be replaced by the latest version tag, such as `1.0.0`**
+**The `Tag` should be replaced by the latest version tag, such as `1.0.0`.**
+**Also can be `master-SNAPSHOT` for the latest build.**
 ```groovy
 dependencies {
     implementation 'com.github.WindLeaf233:PlugApi:Tag'
