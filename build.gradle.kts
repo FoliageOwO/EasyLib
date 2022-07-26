@@ -34,13 +34,12 @@ allprojects {
     }
 
     dependencies {
-        compileOnly("org.jetbrains:annotations:23.0.0")
-        compileOnly("org.apache.maven:maven-artifact:3.8.5")
+        implementation("org.jetbrains:annotations:23.0.0")
+        implementation("org.apache.maven:maven-artifact:3.8.5")
     }
 
     tasks {
         compileJava {
-            dependsOn(clean)
             options.encoding = "UTF-8"
         }
     }
