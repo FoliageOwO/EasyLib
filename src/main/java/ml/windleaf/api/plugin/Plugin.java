@@ -31,8 +31,10 @@ public abstract class Plugin extends JavaPlugin {
         logger = new PluginLogger(this.getPluginName());
         logger.setLoggerColor(this.getLoggerColor());
         logger.logConsole(String.format("&aEnabling &b%s &e[v%s]&a...", this.getPluginName(), this.getPluginVersion()));
-        getConfig().options().copyDefaults();
-        saveDefaultConfig();
+        try {
+            getConfig().options().copyDefaults();
+            saveDefaultConfig();
+        } catch (IllegalArgumentException ignore) {}
         new RegisterManager(this.getInstance(), this.getPackagePath());
     }
 
