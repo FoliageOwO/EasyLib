@@ -1,10 +1,9 @@
 package ml.windleaf.api.utils;
 
-import com.google.common.collect.ImmutableMap;
 import org.bukkit.ChatColor;
 
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.bukkit.ChatColor.*;
 
@@ -14,23 +13,33 @@ public class ChatColorUtil {
     }
 
     public static ChatColor getReverseColor(ChatColor color) {
-        Map<ChatColor, ChatColor> mapping = ImmutableMap.of(
-                BLUE,         DARK_BLUE,
-                GREEN,        DARK_GREEN,
-                RED,          DARK_RED,
-                AQUA,         DARK_AQUA,
-                LIGHT_PURPLE, DARK_PURPLE,
-                YELLOW,       GOLD,
-                WHITE,        GRAY,
-                GRAY,         DARK_GRAY,
-                DARK_GRAY,    BLACK
+        List<ChatColor> list1 = Arrays.asList(
+                BLUE,
+                GREEN,
+                RED,
+                AQUA,
+                LIGHT_PURPLE,
+                YELLOW,
+                WHITE,
+                GRAY,
+                DARK_GRAY);
+        List<ChatColor> list2 = Arrays.asList(
+                DARK_BLUE,
+                DARK_GREEN,
+                DARK_RED,
+                DARK_AQUA,
+                DARK_PURPLE,
+                GOLD,
+                GRAY,
+                DARK_GRAY,
+                BLACK
         );
-        Map<ChatColor, ChatColor> reversedMapping = mapping.entrySet().stream().collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey));
-        Map<?, ?> map = mapping.containsKey(color) ? mapping : reversedMapping;
-        if (map.containsKey(color)) {
-            return mapping.getOrDefault(color, color);
+        if (list1.contains(color)) {
+            return list2.get(list1.indexOf(color));
+        } else if (list2.contains(color)) {
+            return list1.get(list2.indexOf(color));
         } else {
-            return BLACK;
+            return color;
         }
     }
 }
