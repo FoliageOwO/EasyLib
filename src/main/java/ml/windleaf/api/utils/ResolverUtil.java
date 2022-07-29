@@ -6,7 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("unchecked")
-public record ResolverUtil<T>(Class<? extends T> cls) {
+public class ResolverUtil<T> {
+    private final Class<? extends T> cls;
+
+    public ResolverUtil(Class<? extends T> cls) {
+        this.cls = cls;
+    }
+
     public List<Class<? extends T>> getClassesBySuperclass(String packagePath) {
         List<Class<? extends T>> list = new ArrayList<>();
         org.apache.logging.log4j.core.config.plugins.util.ResolverUtil resolver = new org.apache.logging.log4j.core.config.plugins.util.ResolverUtil();
@@ -34,8 +40,8 @@ public record ResolverUtil<T>(Class<? extends T> cls) {
         }, packagePath);
         resolver.getClasses().forEach(it -> {
             if (cls.isAssignableFrom(it)
-                    && !it.isInterface()
-                    && !Modifier.isAbstract(it.getModifiers())) {
+                && !it.isInterface()
+                && !Modifier.isAbstract(it.getModifiers())) {
                 list.add((Class<? extends T>) it);
             }
         });
