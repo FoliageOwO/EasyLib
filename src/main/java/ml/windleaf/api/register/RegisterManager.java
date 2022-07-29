@@ -29,12 +29,12 @@ public class RegisterManager {
             List<Class<? extends IListener>> listeners = listenerResolverUtil.getClassesBySuperclass(packagePath);
             for (Class<? extends ICommand> iCommand : commands) {
                 ICommand iC = ((Class<ICommand>) iCommand).getDeclaredConstructor().newInstance();
-                logger.logConsole("Registering command => %s [%s]".formatted(iC.getClass().getSimpleName(), this.plugin.getName()));
+                logger.logConsole(String.format("Registering command => %s [%s]", iC.getClass().getSimpleName(), this.plugin.getName()));
                 RegisterManager.commands.put(iC.command(), iC);
             }
             for (Class<? extends IListener> iListener : listeners) {
                 IListener iL = ((Class<IListener>) iListener).getDeclaredConstructor().newInstance();
-                logger.logConsole("Registering listener => %s [%s]".formatted(iL.getClass().getSimpleName(), this.plugin.getName()));
+                logger.logConsole(String.format("Registering listener => %s [%s]", iL.getClass().getSimpleName(), this.plugin.getName()));
                 this.registerEvent(iL);
             }
             this.registerEvent(new CommandListener());

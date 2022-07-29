@@ -10,13 +10,14 @@ import org.bukkit.event.server.ServerCommandEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class CommandListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerCommandPreprocessEvent(@NotNull PlayerCommandPreprocessEvent e) {
-        List<String> list = new ArrayList<>(List.of(StringUtils.removeStart(e.getMessage(), "/").split(" ")));
+        List<String> list = new ArrayList<>(Arrays.asList(StringUtils.removeStart(e.getMessage(), "/").split(" ")));
         boolean handle = handleCommand(list, e.getPlayer());
         if (handle) {
             e.setCancelled(true);
@@ -25,7 +26,7 @@ public class CommandListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onServerCommandEvent(@NotNull ServerCommandEvent e) {
-        List<String> list = new ArrayList<>(List.of(e.getCommand().split(" ")));
+        List<String> list = new ArrayList<>(Arrays.asList(e.getCommand().split(" ")));
         boolean handle = handleCommand(list, e.getSender());
         if (handle) {
             e.setCancelled(true);

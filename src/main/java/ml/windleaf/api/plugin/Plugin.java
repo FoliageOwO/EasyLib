@@ -30,7 +30,7 @@ public abstract class Plugin extends JavaPlugin {
     public void onEnable() {
         logger = new PluginLogger(this.getPluginName());
         logger.setLoggerColor(this.getLoggerColor());
-        logger.logConsole("&aEnabling &b%s &e[v%s]&a...".formatted(this.getPluginName(), this.getPluginVersion()));
+        logger.logConsole(String.format("&aEnabling &b%s &e[v%s]&a...", this.getPluginName(), this.getPluginVersion()));
         getConfig().options().copyDefaults();
         saveDefaultConfig();
         new RegisterManager(this.getInstance(), this.getPackagePath());
@@ -38,6 +38,6 @@ public abstract class Plugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        logger.logConsole("&aDisabling &b%s&a...".formatted(this.getPluginName()));
+        logger.logConsole(String.format("&aDisabling &b%s&a...", this.getPluginName()));
     }
 }

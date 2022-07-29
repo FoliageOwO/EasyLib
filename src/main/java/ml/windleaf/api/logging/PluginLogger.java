@@ -32,10 +32,10 @@ public class PluginLogger {
     public void logConsole(Object... any) {
         StringBuilder sb = new StringBuilder();
         for (Object anyObject : any) {
-            sb.append(" %s ".formatted(anyObject.toString()));
+            sb.append(String.format(" %s ", anyObject.toString()));
         }
-        Bukkit.getConsoleSender().sendMessage("%s%s%s".formatted(
-                this.nameFormat.getContent().formatted(ChatColorUtil.getTextColored(this.name, ChatColorUtil.getReverseColor(this.color))),
+        Bukkit.getConsoleSender().sendMessage(String.format("%s%s%s",
+                String.format(this.nameFormat.getContent(), ChatColorUtil.getTextColored(this.name, ChatColorUtil.getReverseColor(this.color))),
                 this.separator.getContent(),
                 ColoredTextUtil.color(sb.toString().trim()))
         );
