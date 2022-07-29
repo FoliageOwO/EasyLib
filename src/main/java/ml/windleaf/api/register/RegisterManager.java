@@ -23,8 +23,8 @@ public class RegisterManager {
     public RegisterManager(JavaPlugin plugin, String packagePath) {
         try {
             this.plugin = plugin;
-            ResolverUtil<ICommand> commandResolverUtil = new ResolverUtil<>();
-            ResolverUtil<IListener> listenerResolverUtil = new ResolverUtil<>();
+            ResolverUtil<ICommand> commandResolverUtil = new ResolverUtil<>(ICommand.class);
+            ResolverUtil<IListener> listenerResolverUtil = new ResolverUtil<>(IListener.class);
             List<Class<? extends ICommand>> commands = commandResolverUtil.getClassesBySuperclass(packagePath);
             List<Class<? extends IListener>> listeners = listenerResolverUtil.getClassesBySuperclass(packagePath);
             for (Class<? extends ICommand> iCommand : commands) {
