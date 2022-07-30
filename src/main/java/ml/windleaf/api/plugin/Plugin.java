@@ -14,7 +14,7 @@ public abstract class Plugin extends JavaPlugin {
     protected abstract void superConfig();
 
     @Override
-    public void onLoad() {
+    public final void onLoad() {
         this.superConfig();
     }
 
