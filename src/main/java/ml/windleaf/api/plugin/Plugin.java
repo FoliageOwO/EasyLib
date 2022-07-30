@@ -10,6 +10,7 @@ public abstract class Plugin extends JavaPlugin {
     protected String packagePath = null;
     protected ChatColor loggerColor = ChatColor.GRAY;
     public static PluginLogger logger;
+    public static Plugin instance;
 
     protected abstract void superConfig();
 
@@ -24,6 +25,7 @@ public abstract class Plugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        instance = this;
         logger = new PluginLogger(this.getName());
         logger.setLoggerColor(this.loggerColor);
         logger.logConsole(String.format("&aEnabling &b%s &e[v%s]&a...", this.getName(), this.version));
