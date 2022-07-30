@@ -6,8 +6,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public abstract class Plugin extends JavaPlugin {
-    protected String version;
-    protected String packagePath;
+    protected String version = null;
+    protected String packagePath = null;
     protected ChatColor loggerColor = ChatColor.GRAY;
     public static PluginLogger logger;
 
@@ -16,6 +16,10 @@ public abstract class Plugin extends JavaPlugin {
     @Override
     public final void onLoad() {
         this.superConfig();
+        if (this.version == null || this.packagePath == null) {
+            logger.logConsole("&cNo config found, please set version and package in `superConfig` method!");
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
