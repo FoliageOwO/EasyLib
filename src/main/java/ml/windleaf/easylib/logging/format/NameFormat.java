@@ -1,25 +1,22 @@
-package ml.windleaf.api.logging.format;
+package ml.windleaf.easylib.logging.format;
 
-import ml.windleaf.api.utils.ChatColorUtil;
+import ml.windleaf.easylib.utils.ChatColorUtil;
 import org.bukkit.ChatColor;
 
-public enum Separator {
-    EMPTY(" "),
-    HYPHEN(" - "),
-    DELIMITER(" | "),
-    SINGLE_ARROW(" > "),
-    TRI_ARROW(" >>> "),
+public enum NameFormat {
+    EMPTY("%s"),
+    SQUARE_BRACKETS("[%s]"),
     ;
 
     private final String content;
     private final Boolean bold;
 
-    Separator(String content) {
+    NameFormat(String content) {
         this.content = content;
         this.bold = false;
     }
 
-    Separator(String content, Boolean bold) {
+    NameFormat(String content, Boolean bold) {
         this.content = content;
         this.bold = bold;
     }

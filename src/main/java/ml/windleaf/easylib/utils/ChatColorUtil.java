@@ -1,4 +1,4 @@
-package ml.windleaf.api.utils;
+package ml.windleaf.easylib.utils;
 
 import org.bukkit.ChatColor;
 

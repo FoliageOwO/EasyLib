@@ -1,4 +1,4 @@
-package ml.windleaf.api.interfaces;
+package ml.windleaf.easylib.interfaces;
 
 import java.lang.annotation.*;
 

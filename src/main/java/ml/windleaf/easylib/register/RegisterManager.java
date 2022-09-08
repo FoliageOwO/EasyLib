@@ -1,10 +1,9 @@
-package ml.windleaf.api.register;
+package ml.windleaf.easylib.register;
 
-import ml.windleaf.api.interfaces.CommandInfo;
-import ml.windleaf.api.interfaces.ICommand;
-import ml.windleaf.api.interfaces.IListener;
-import ml.windleaf.api.logging.PluginLogger;
-import ml.windleaf.api.utils.ClassUtil;
+import ml.windleaf.easylib.interfaces.CommandInfo;
+import ml.windleaf.easylib.interfaces.ICommand;
+import ml.windleaf.easylib.interfaces.IListener;
+import ml.windleaf.easylib.utils.ClassUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -18,7 +17,6 @@ import java.util.function.Consumer;
 @SuppressWarnings("unchecked")
 public class RegisterManager {
     private final Plugin plugin;
-    private static final PluginLogger logger = new PluginLogger("PlugApi");
     public static final Map<String, ICommand> commands = new HashMap<>();
 
     public RegisterManager(JavaPlugin plugin, String packagePath) {

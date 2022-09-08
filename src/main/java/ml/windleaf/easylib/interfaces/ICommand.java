@@ -1,7 +1,7 @@
-package ml.windleaf.api.interfaces;
+package ml.windleaf.easylib.interfaces;
 
-import ml.windleaf.api.logging.PluginLogger;
-import ml.windleaf.api.plugin.EasyLib;
+import ml.windleaf.easylib.logging.PluginLogger;
+import ml.windleaf.easylib.plugin.EasyLib;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 

@@ -1,7 +1,7 @@
-package ml.windleaf.api.plugin;
+package ml.windleaf.easylib.plugin;
 
-import ml.windleaf.api.logging.PluginLogger;
-import ml.windleaf.api.register.RegisterManager;
+import ml.windleaf.easylib.logging.PluginLogger;
+import ml.windleaf.easylib.register.RegisterManager;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 

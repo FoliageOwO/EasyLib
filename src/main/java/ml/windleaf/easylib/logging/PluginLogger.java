@@ -1,9 +1,9 @@
-package ml.windleaf.api.logging;
+package ml.windleaf.easylib.logging;
 
-import ml.windleaf.api.logging.format.NameFormat;
-import ml.windleaf.api.logging.format.Separator;
-import ml.windleaf.api.utils.ChatColorUtil;
-import ml.windleaf.api.utils.ColoredTextUtil;
+import ml.windleaf.easylib.logging.format.NameFormat;
+import ml.windleaf.easylib.logging.format.Separator;
+import ml.windleaf.easylib.utils.ChatColorUtil;
+import ml.windleaf.easylib.utils.ColoredTextUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
