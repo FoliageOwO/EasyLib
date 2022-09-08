@@ -12,5 +12,9 @@ public interface ICommand {
     PluginLogger logger = Plugin.logger;
 
     String command();
+
     void onCommand(@NotNull CommandSender sender, @NotNull List<String> args);
+    default List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
+        return null;
+    }
 }

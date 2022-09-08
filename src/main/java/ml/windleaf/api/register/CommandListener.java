@@ -7,6 +7,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.server.ServerCommandEvent;
+import org.bukkit.event.server.TabCompleteEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -30,6 +31,18 @@ public class CommandListener implements Listener {
         boolean handle = handleCommand(list, e.getSender());
         if (handle) {
             e.setCancelled(true);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onTabCompleteEvent(@NotNull TabCompleteEvent e) {
+        String[] list = e.getCompletions().toArray(new String[0]);
+        String command = list[0];
+        for (String cmd : RegisterManager.commands.keySet()) {
+            if (Objects.equals(command, cmd)) {
+                List<String> result = RegisterManager.commands.get(cmd).onTabComplete(e.getSender(), list);
+                e.setCompletions(result);
+            }
         }
     }
 
