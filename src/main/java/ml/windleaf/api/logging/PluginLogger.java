@@ -7,6 +7,10 @@ import ml.windleaf.api.utils.ColoredTextUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class PluginLogger {
     private final String name;
     private final NameFormat nameFormat;
@@ -31,9 +35,7 @@ public class PluginLogger {
 
     public void logConsole(Object... any) {
         StringBuilder sb = new StringBuilder();
-        for (Object anyObject : any) {
-            sb.append(String.format(" %s ", anyObject.toString()));
-        }
+        Arrays.asList(any).forEach(obj -> sb.append(String.format(" %s ", obj.toString())));
         Bukkit.getConsoleSender().sendMessage(String.format("%s%s%s",
                 String.format(this.nameFormat.getContent(), ChatColorUtil.getTextColored(this.name, ChatColorUtil.getReverseColor(this.color))),
                 this.separator.getContent(),

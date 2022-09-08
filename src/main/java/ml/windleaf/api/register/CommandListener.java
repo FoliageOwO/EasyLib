@@ -19,42 +19,34 @@ public class CommandListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerCommandPreprocessEvent(@NotNull PlayerCommandPreprocessEvent e) {
         List<String> list = new ArrayList<>(Arrays.asList(StringUtils.removeStart(e.getMessage(), "/").split(" ")));
-        boolean handle = handleCommand(list, e.getPlayer());
-        if (handle) {
-            e.setCancelled(true);
-        }
+        handleCommand(list, e.getPlayer());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onServerCommandEvent(@NotNull ServerCommandEvent e) {
         List<String> list = new ArrayList<>(Arrays.asList(e.getCommand().split(" ")));
-        boolean handle = handleCommand(list, e.getSender());
-        if (handle) {
-            e.setCancelled(true);
-        }
+        handleCommand(list, e.getSender());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onTabCompleteEvent(@NotNull TabCompleteEvent e) {
         String[] list = e.getCompletions().toArray(new String[0]);
         String command = list[0];
-        for (String cmd : RegisterManager.commands.keySet()) {
+        RegisterManager.commands.keySet().forEach(cmd -> {
             if (Objects.equals(command, cmd)) {
                 List<String> result = RegisterManager.commands.get(cmd).onTabComplete(e.getSender(), list);
                 e.setCompletions(result);
             }
-        }
+        });
     }
 
-    private boolean handleCommand(@NotNull List<String> list, @NotNull CommandSender sender) {
+    private void handleCommand(@NotNull List<String> list, @NotNull CommandSender sender) {
         String command = list.get(0);
         list.remove(0);
-        for (String cmd : RegisterManager.commands.keySet()) {
+        RegisterManager.commands.keySet().forEach(cmd -> {
             if (Objects.equals(command, cmd)) {
                 RegisterManager.commands.get(cmd).onCommand(sender, list);
-                return true;
             }
-        }
-        return false;
+        });
     }
 }
