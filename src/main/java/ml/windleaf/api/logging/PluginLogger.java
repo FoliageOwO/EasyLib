@@ -7,9 +7,7 @@ import ml.windleaf.api.utils.ColoredTextUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class PluginLogger {
     private final String name;

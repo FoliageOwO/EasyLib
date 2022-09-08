@@ -11,8 +11,6 @@ public interface ICommand {
     EasyLib instance = EasyLib.instance;
     PluginLogger logger = EasyLib.logger;
 
-    String command();
-
     void onCommand(@NotNull CommandSender sender, @NotNull List<String> args);
     default List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
         return null;

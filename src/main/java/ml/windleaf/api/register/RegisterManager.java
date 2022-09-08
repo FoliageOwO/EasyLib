@@ -1,5 +1,6 @@
 package ml.windleaf.api.register;
 
+import ml.windleaf.api.interfaces.CommandInfo;
 import ml.windleaf.api.interfaces.ICommand;
 import ml.windleaf.api.interfaces.IListener;
 import ml.windleaf.api.logging.PluginLogger;
@@ -9,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -26,7 +28,8 @@ public class RegisterManager {
         (new ClassUtil<>(ICommand.class)).getClassesBySuperclass(packagePath).forEach(command -> {
             try {
                 ICommand instance = ((Class<ICommand>) command).getDeclaredConstructor().newInstance();
-                RegisterManager.commands.put(instance.command(), instance);
+                CommandInfo info = command.getAnnotation(CommandInfo.class);
+                Arrays.asList(info.value()).forEach(cmd -> RegisterManager.commands.put(cmd, instance));
             } catch (Exception e) { catchException.accept(e); }
         });
 
