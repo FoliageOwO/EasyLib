@@ -3,7 +3,7 @@ package ml.windleaf.easylib.logging;
 import ml.windleaf.easylib.logging.format.NameFormat;
 import ml.windleaf.easylib.logging.format.Separator;
 import ml.windleaf.easylib.utils.ChatColorUtil;
-import ml.windleaf.easylib.utils.ColoredTextUtil;
+import ml.windleaf.easylib.utils.ChatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
@@ -37,7 +37,7 @@ public class PluginLogger {
         Bukkit.getConsoleSender().sendMessage(String.format("%s%s%s",
                 String.format(this.nameFormat.getContent(), ChatColorUtil.getTextColored(this.name, ChatColorUtil.getReverseColor(this.color))),
                 this.separator.getContent(),
-                ColoredTextUtil.color(sb.toString().trim()))
+                ChatUtil.color(sb.toString().trim()))
         );
     }
 }
