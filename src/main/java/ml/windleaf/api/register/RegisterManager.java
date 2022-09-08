@@ -3,7 +3,7 @@ package ml.windleaf.api.register;
 import ml.windleaf.api.interfaces.ICommand;
 import ml.windleaf.api.interfaces.IListener;
 import ml.windleaf.api.logging.PluginLogger;
-import ml.windleaf.api.utils.ResolverUtil;
+import ml.windleaf.api.utils.ClassUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -23,14 +23,14 @@ public class RegisterManager {
         this.plugin = plugin;
         Consumer<Exception> catchException = e -> { throw new RuntimeException(e); };
 
-        (new ResolverUtil<>(ICommand.class)).getClassesBySuperclass(packagePath).forEach(command -> {
+        (new ClassUtil<>(ICommand.class)).getClassesBySuperclass(packagePath).forEach(command -> {
             try {
                 ICommand instance = ((Class<ICommand>) command).getDeclaredConstructor().newInstance();
                 RegisterManager.commands.put(instance.command(), instance);
             } catch (Exception e) { catchException.accept(e); }
         });
 
-        (new ResolverUtil<>(IListener.class)).getClassesBySuperclass(packagePath).forEach(listener -> {
+        (new ClassUtil<>(IListener.class)).getClassesBySuperclass(packagePath).forEach(listener -> {
             try {
                 IListener instance = ((Class<IListener>) listener).getDeclaredConstructor().newInstance();
                 this.registerEvent(instance);

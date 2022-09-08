@@ -130,7 +130,7 @@ String coloredText = ColoredTextUtil.color(text)
 2. Get classes which implements another class
 ```java
 // import the `ResolverUtil`
-import ml.windleaf.api.utils.ResolverUtil;
+import ml.windleaf.api.utils.ClassUtil;
 
 ...
 
