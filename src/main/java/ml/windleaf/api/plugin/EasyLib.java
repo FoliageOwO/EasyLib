@@ -5,12 +5,12 @@ import ml.windleaf.api.register.RegisterManager;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public abstract class Plugin extends JavaPlugin {
+public abstract class EasyLib extends JavaPlugin {
     protected String version = null;
     protected String packagePath = null;
     protected ChatColor loggerColor = ChatColor.GRAY;
     public static PluginLogger logger;
-    public static Plugin instance;
+    public static EasyLib instance;
 
     protected abstract void superConfig();
 

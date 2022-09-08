@@ -1,2 +1,2 @@
-rootProject.name = "PlugApi"
+rootProject.name = "EasyLib"
 

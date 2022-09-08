@@ -1,10 +1,10 @@
-# PlugApi
-[![Release](https://jitpack.io/v/WindLeaf233/PlugApi.svg)](https://jitpack.io/#WindLeaf233/PlugApi)
-![Build](https://img.shields.io/github/workflow/status/WindLeaf233/PlugApi/Java%20CI%20with%20Gradle)
-![Commit](https://img.shields.io/github/last-commit/WindLeaf233/PlugApi)
+# EasyLib
+[![Release](https://jitpack.io/v/WindLeaf233/EasyLib.svg)](https://jitpack.io/#WindLeaf233/EasyLib)
+![Build](https://img.shields.io/github/workflow/status/WindLeaf233/EasyLib/Java%20CI%20with%20Gradle)
+![Commit](https://img.shields.io/github/last-commit/WindLeaf233/EasyLib)
 
-![Size](https://img.shields.io/github/repo-size/WindLeaf233/PlugApi)
-[![License](https://img.shields.io/github/license/WindLeaf233/PlugApi)](https://choosealicense.com/licenses/gpl-3.0/)
+![Size](https://img.shields.io/github/repo-size/WindLeaf233/EasyLib)
+[![License](https://img.shields.io/github/license/WindLeaf233/EasyLib)](https://choosealicense.com/licenses/gpl-3.0/)
 
 
 An API Library For Minecraft Plugins
@@ -25,7 +25,7 @@ repositories {
 **Also can be `master-SNAPSHOT` for the latest build.**
 ```groovy
 dependencies {
-    implementation 'com.github.WindLeaf233:PlugApi:Tag'
+    implementation 'com.github.WindLeaf233:EasyLib:Tag'
 }
 ```
 

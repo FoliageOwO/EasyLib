@@ -51,7 +51,7 @@ publishing {
     publications {
         create("maven_public", MavenPublication::class) {
             groupId = "ml.windleaf"
-            artifactId = "PlugApi"
+            artifactId = "EasyLib"
             version = version
             from(components.getByName("java"))
         }
