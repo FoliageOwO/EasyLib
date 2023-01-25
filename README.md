@@ -1,6 +1,6 @@
 # EasyLib
 [![Release](https://jitpack.io/v/WindLeaf233/EasyLib.svg)](https://jitpack.io/#WindLeaf233/EasyLib)
-![Build](https://img.shields.io/github/workflow/status/WindLeaf233/EasyLib/Java%20CI%20with%20Gradle)
+![Build](https://img.shields.io/github/actions/workflow/status/WindLeaf233/EasyLib/build.yml?branch=master)
 ![Commit](https://img.shields.io/github/last-commit/WindLeaf233/EasyLib)
 
 ![Size](https://img.shields.io/github/repo-size/WindLeaf233/EasyLib)
