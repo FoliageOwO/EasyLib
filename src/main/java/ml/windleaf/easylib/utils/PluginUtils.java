@@ -9,6 +9,7 @@ import java.util.function.Function;
 
 import static ml.windleaf.easylib.plugin.EasyLib.instance;
 
+@SuppressWarnings("unchecked")
 public class PluginUtils {
     /**
      * 调用事件
@@ -31,5 +32,22 @@ public class PluginUtils {
             if (function.apply(any)) result.set(any);
         });
         return result.get();
+    }
+
+    /**
+     * 获取配置对象
+     * @param path 配置路径
+     * @param defaultValue 默认值
+     * @return 获取到的配置对象
+     * @param <T> 对象泛型
+     */
+    public static <T> T getConfig(String path, T defaultValue) {
+        T result;
+        try {
+            result = (T) instance.getConfig().get(path);
+        } catch (Exception ignore) {
+            result = defaultValue;
+        }
+        return result == null ? defaultValue : result;
     }
 }
