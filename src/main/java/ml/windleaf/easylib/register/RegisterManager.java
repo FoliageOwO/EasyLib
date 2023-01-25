@@ -12,7 +12,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Consumer;
 
 public class RegisterManager {
     private final Plugin plugin;
@@ -20,23 +19,18 @@ public class RegisterManager {
 
     public RegisterManager(JavaPlugin plugin, String packagePath) {
         this.plugin = plugin;
-        Consumer<Exception> catchException = e -> { throw new RuntimeException(e); };
 
         ClassUtil.getSubClasses(ICommand.class, packagePath).forEach(command -> {
-            try {
-                ICommand instance = ClassUtil.newInstance(command);
-                CommandInfo info = command.getAnnotation(CommandInfo.class);
-                if (info != null) {
-                    Arrays.asList(info.value()).forEach(cmd -> RegisterManager.commands.put(cmd, instance));
-                }
-            } catch (Exception e) { catchException.accept(e); }
+            ICommand instance = ClassUtil.newInstance(command);
+            CommandInfo info = command.getAnnotation(CommandInfo.class);
+            if (info != null) {
+                Arrays.asList(info.value()).forEach(cmd -> RegisterManager.commands.put(cmd, instance));
+            }
         });
 
         ClassUtil.getSubClasses(IListener.class, packagePath).forEach(listener -> {
-            try {
-                IListener instance = ClassUtil.newInstance(listener);
-                this.registerEvent(instance);
-            } catch (Exception e) { catchException.accept(e); }
+            IListener instance = ClassUtil.newInstance(listener);
+            this.registerEvent(instance);
         });
 
         this.registerEvent(new CommandListener());
