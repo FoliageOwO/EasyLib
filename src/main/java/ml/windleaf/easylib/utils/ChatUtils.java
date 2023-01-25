@@ -15,7 +15,7 @@ public class ChatUtils {
     // 存放颜色的列表，用于随机颜色生成
     private static final ArrayList<ChatColor> colors = new ArrayList<>();
     // 存放颜色代码对应的中文翻译
-    private static final HashMap<ChatColor, String> colorsNameMap = new HashMap<>() {{
+    private static final HashMap<ChatColor, String> colorsNameMap = new HashMap<ChatColor, String>() {{
         put(AQUA, "青");
         put(BLACK, "黑");
         put(BLUE, "蓝");
