@@ -2,6 +2,7 @@ package ml.windleaf.easylib.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
+import org.bukkit.event.Listener;
 
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicReference;
@@ -9,6 +10,9 @@ import java.util.function.Function;
 
 import static ml.windleaf.easylib.plugin.EasyLib.instance;
 
+/**
+ * 和插件相关的工具类
+ */
 @SuppressWarnings("unchecked")
 public class PluginUtils {
     /**
@@ -17,6 +21,10 @@ public class PluginUtils {
      */
     public static void callEvent(Event event) {
         Bukkit.getScheduler().runTask(instance, () -> instance.getServer().getPluginManager().callEvent(event));
+    }
+
+    public static void registerEvent(Listener listener) {
+        Bukkit.getServer().getPluginManager().registerEvents(listener, instance);
     }
 
     /**

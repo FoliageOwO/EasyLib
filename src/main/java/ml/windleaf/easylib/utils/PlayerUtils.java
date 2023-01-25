@@ -6,6 +6,9 @@ import org.bukkit.entity.Player;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * 和玩家相关的工具类
+ */
 public class PlayerUtils {
     /**
      * 给玩家发送信息
@@ -15,7 +18,7 @@ public class PlayerUtils {
     public static void send(CommandSender sender, String message) {
         StringBuilder sb = new StringBuilder();
         Collections.singletonList(message).forEach(it -> sb.append(it).append(" "));
-        sender.sendMessage(ChatUtils.translateColor(sb.toString()));
+        sender.sendMessage(TextUtils.translateColor(sb.toString()));
     }
 
     /**
@@ -35,7 +38,7 @@ public class PlayerUtils {
      * @param subtitle 要显示的副标题
      */
     public static void showTitle(Player player, String title, String subtitle) {
-        player.sendTitle(ChatUtils.translateColor(title), ChatUtils.translateColor(subtitle));
+        player.sendTitle(TextUtils.translateColor(title), TextUtils.translateColor(subtitle), 10, 70, 20);
     }
 
     /**

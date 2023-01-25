@@ -4,22 +4,24 @@ import ml.windleaf.easylib.interfaces.CommandInfo;
 import ml.windleaf.easylib.interfaces.ICommand;
 import ml.windleaf.easylib.interfaces.IListener;
 import ml.windleaf.easylib.utils.ClassUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
+import ml.windleaf.easylib.utils.PluginUtils;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 注册管理器
+ * TODO 更名为 `RegistrationManager`
+ */
 public class RegisterManager {
-    private final Plugin plugin;
+    /**
+     * 存储的命令和对应的 `ICommand`
+     */
     public static final Map<String, ICommand> commands = new HashMap<>();
 
-    public RegisterManager(JavaPlugin plugin, String packagePath) {
-        this.plugin = plugin;
-
+    public RegisterManager(String packagePath) {
+        // 注册命令
         ClassUtils.getSubClasses(ICommand.class, packagePath).forEach(command -> {
             ICommand instance = ClassUtils.newInstance(command);
             CommandInfo info = command.getAnnotation(CommandInfo.class);
@@ -28,15 +30,12 @@ public class RegisterManager {
             }
         });
 
+        // 注册事件
         ClassUtils.getSubClasses(IListener.class, packagePath).forEach(listener -> {
             IListener instance = ClassUtils.newInstance(listener);
-            this.registerEvent(instance);
+            PluginUtils.registerEvent(instance);
         });
 
-        this.registerEvent(new CommandListener());
-    }
-
-    private void registerEvent(Listener listener) {
-        Bukkit.getServer().getPluginManager().registerEvents(listener, this.plugin);
+        PluginUtils.registerEvent(new CommandListener());
     }
 }

@@ -18,6 +18,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * 插件第三方命令监听器
+ * <p>
+ * 用于解决原版命令监听的缺点
+ */
 public class CommandListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerCommandPreprocessEvent(@NotNull PlayerCommandPreprocessEvent e) {
@@ -45,15 +50,24 @@ public class CommandListener implements Listener {
         });
     }
 
+    /**
+     * 将命令交给命令对应的 `ICommand` 实例对象处理
+     * @param args 命令参数
+     * @param sender 发送命令的实体
+     */
     private void handleCommand(@NotNull List<String> args, @NotNull CommandSender sender) {
-        String command = args.get(0);
+        // 获取命令文本
+        String cmd = args.get(0);
         args.remove(0);
-        String cmd = PluginUtils.find(RegisterManager.commands.keySet(), c -> Objects.equals(c, command));
+        // 获取 `ICommand` 实例对象和 `CommandInfo` 对象
         ICommand instance = RegisterManager.commands.get(cmd);
-        CommandInfo info = instance.getClass().getAnnotation(CommandInfo.class);
-        String permission = info.permission();
-        if (sender.hasPermission(permission) || permission.equals("")) {
-            RegisterManager.commands.get(cmd).onCommand(sender, args);
+        if (instance != null) {
+            CommandInfo info = instance.getClass().getAnnotation(CommandInfo.class);
+            // 判断权限并执行
+            String permission = info.permission();
+            if (sender.hasPermission(permission) || permission.equals("")) {
+                RegisterManager.commands.get(cmd).onCommand(sender, args);
+            }
         }
     }
 }

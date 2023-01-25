@@ -10,6 +10,9 @@ import java.util.stream.Collectors;
 import static ml.windleaf.easylib.plugin.EasyLib.logger;
 import static org.reflections.scanners.Scanners.SubTypes;
 
+/**
+ * 和类相关的工具类
+ */
 @SuppressWarnings("unchecked")
 public class ClassUtils {
     /**

@@ -11,7 +11,10 @@ import java.util.stream.Collectors;
 
 import static org.bukkit.ChatColor.*;
 
-public class ChatUtils {
+/**
+ * 和文本、颜色相关的工具类
+ */
+public class TextUtils {
     // 存放颜色的列表，用于随机颜色生成
     private static final ArrayList<ChatColor> colors = new ArrayList<>();
     // 存放颜色代码对应的中文翻译
