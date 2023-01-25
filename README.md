@@ -7,24 +7,36 @@
 [![License](https://img.shields.io/github/license/WindLeaf233/EasyLib)](https://choosealicense.com/licenses/gpl-3.0/)
 
 
-:four_leaf_clover: A library to create a plugin easily: ***tiny, easy to use***.
+:four_leaf_clover: 旨在让创建 `Minecraft` 插件更简单的支持库，易于使用。
 
 ---
 
-## Uses
+## 使用方法
 ### Gradle
-1. Add `jitpack` repositories
 ```groovy
 repositories {
     maven { url 'https://jitpack.io' }
 }
-```
-2. Add dependency
 
-**The `Tag` should be replaced by the latest version tag, such as `1.0.0`.**
-**Also can be `master-SNAPSHOT` for the latest build.**
-```groovy
 dependencies {
-    implementation 'com.github.WindLeaf233:EasyLib:Tag'
+    implementation 'com.github.WindLeaf233:EasyLib:1.0.3' // 最后的版本号可为 `master-SNAPSHOT` 表示最新构建版
 }
+```
+
+### Maven
+```xml
+<repositories>
+    <repository>
+        <id>jitpack</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+
+<dependencies>
+    <dependency>
+        <groupId>com.github.WindLeaf233</groupId>
+        <artifactId>EasyLib</artifactId>
+        <version>1.0.3</version>
+    </dependency>
+</dependencies>
 ```
