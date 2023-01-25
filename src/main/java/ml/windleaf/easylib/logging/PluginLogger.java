@@ -2,8 +2,8 @@ package ml.windleaf.easylib.logging;
 
 import ml.windleaf.easylib.logging.format.NameFormat;
 import ml.windleaf.easylib.logging.format.Separator;
-import ml.windleaf.easylib.utils.ChatColorUtil;
-import ml.windleaf.easylib.utils.ChatUtil;
+import ml.windleaf.easylib.utils.ChatColorUtils;
+import ml.windleaf.easylib.utils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
@@ -35,9 +35,9 @@ public class PluginLogger {
         StringBuilder sb = new StringBuilder();
         Arrays.asList(any).forEach(obj -> sb.append(String.format(" %s ", obj.toString())));
         Bukkit.getConsoleSender().sendMessage(String.format("%s%s%s",
-                String.format(this.nameFormat.getContent(), ChatColorUtil.getTextColored(this.name, ChatColorUtil.getReverseColor(this.color))),
+                String.format(this.nameFormat.getContent(), ChatColorUtils.getTextColored(this.name, ChatColorUtils.getReverseColor(this.color))),
                 this.separator.getContent(),
-                ChatUtil.color(sb.toString().trim()))
+                ChatUtils.translateColor(sb.toString().trim()))
         );
     }
 }

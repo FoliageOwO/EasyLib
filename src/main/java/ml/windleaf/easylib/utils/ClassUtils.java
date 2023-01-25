@@ -11,7 +11,7 @@ import static ml.windleaf.easylib.plugin.EasyLib.logger;
 import static org.reflections.scanners.Scanners.SubTypes;
 
 @SuppressWarnings("unchecked")
-public class ClassUtil {
+public class ClassUtils {
     /**
      * 获取指定包下的所有指定类的子类
      * @param clazz 要获取的类

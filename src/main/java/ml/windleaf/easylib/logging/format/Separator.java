@@ -1,6 +1,6 @@
 package ml.windleaf.easylib.logging.format;
 
-import ml.windleaf.easylib.utils.ChatColorUtil;
+import ml.windleaf.easylib.utils.ChatColorUtils;
 import org.bukkit.ChatColor;
 
 public enum Separator {
@@ -26,7 +26,7 @@ public enum Separator {
 
     public String getContent() {
         return this.bold
-                ? ChatColorUtil.getTextColored(this.content, ChatColor.BOLD)
+                ? ChatColorUtils.getTextColored(this.content, ChatColor.BOLD)
                 : this.content;
     }
 }

@@ -3,7 +3,7 @@ package ml.windleaf.easylib.register;
 import ml.windleaf.easylib.interfaces.CommandInfo;
 import ml.windleaf.easylib.interfaces.ICommand;
 import ml.windleaf.easylib.interfaces.IListener;
-import ml.windleaf.easylib.utils.ClassUtil;
+import ml.windleaf.easylib.utils.ClassUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -20,16 +20,16 @@ public class RegisterManager {
     public RegisterManager(JavaPlugin plugin, String packagePath) {
         this.plugin = plugin;
 
-        ClassUtil.getSubClasses(ICommand.class, packagePath).forEach(command -> {
-            ICommand instance = ClassUtil.newInstance(command);
+        ClassUtils.getSubClasses(ICommand.class, packagePath).forEach(command -> {
+            ICommand instance = ClassUtils.newInstance(command);
             CommandInfo info = command.getAnnotation(CommandInfo.class);
             if (info != null) {
                 Arrays.asList(info.value()).forEach(cmd -> RegisterManager.commands.put(cmd, instance));
             }
         });
 
-        ClassUtil.getSubClasses(IListener.class, packagePath).forEach(listener -> {
-            IListener instance = ClassUtil.newInstance(listener);
+        ClassUtils.getSubClasses(IListener.class, packagePath).forEach(listener -> {
+            IListener instance = ClassUtils.newInstance(listener);
             this.registerEvent(instance);
         });
 

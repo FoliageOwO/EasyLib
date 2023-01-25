@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.bukkit.ChatColor.*;
 
-public class ChatColorUtil {
+public class ChatColorUtils {
     public static String getTextColored(String text, ChatColor color) {
         return color + text + ChatColor.RESET;
     }
