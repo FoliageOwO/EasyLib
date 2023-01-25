@@ -14,8 +14,7 @@ repositories {
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
-    implementation("org.apache.logging.log4j:log4j-core:2.18.0")
+    implementation("org.reflections:reflections:0.10.2")
     compileOnly("org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT")
 }
 

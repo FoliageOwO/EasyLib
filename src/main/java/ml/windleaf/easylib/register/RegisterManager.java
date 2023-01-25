@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-@SuppressWarnings("unchecked")
 public class RegisterManager {
     private final Plugin plugin;
     public static final Map<String, ICommand> commands = new HashMap<>();
@@ -23,17 +22,19 @@ public class RegisterManager {
         this.plugin = plugin;
         Consumer<Exception> catchException = e -> { throw new RuntimeException(e); };
 
-        (new ClassUtil<>(ICommand.class)).getClassesBySuperclass(packagePath).forEach(command -> {
+        ClassUtil.getSubClasses(ICommand.class, packagePath).forEach(command -> {
             try {
-                ICommand instance = ((Class<ICommand>) command).getDeclaredConstructor().newInstance();
+                ICommand instance = ClassUtil.newInstance(command);
                 CommandInfo info = command.getAnnotation(CommandInfo.class);
-                Arrays.asList(info.value()).forEach(cmd -> RegisterManager.commands.put(cmd, instance));
+                if (info != null) {
+                    Arrays.asList(info.value()).forEach(cmd -> RegisterManager.commands.put(cmd, instance));
+                }
             } catch (Exception e) { catchException.accept(e); }
         });
 
-        (new ClassUtil<>(IListener.class)).getClassesBySuperclass(packagePath).forEach(listener -> {
+        ClassUtil.getSubClasses(IListener.class, packagePath).forEach(listener -> {
             try {
-                IListener instance = ((Class<IListener>) listener).getDeclaredConstructor().newInstance();
+                IListener instance = ClassUtil.newInstance(listener);
                 this.registerEvent(instance);
             } catch (Exception e) { catchException.accept(e); }
         });
