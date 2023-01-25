@@ -7,4 +7,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CommandInfo {
     String[] value();
+
+    String permission() default "";
 }
