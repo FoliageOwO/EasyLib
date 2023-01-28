@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import static ml.windleaf.easylib.plugin.EasyLib.logger;
+import static ml.windleaf.easylib.EasyLib.logger;
 import static org.reflections.scanners.Scanners.SubTypes;
 
 /**
@@ -46,7 +46,7 @@ public class ClassUtils {
                 return constructor.newInstance(args);
             }
         } catch (Exception e) {
-            logger.logConsole("&cCould not create new instance of [", clazz, "]: ", e.getMessage());
+            logger.logConsole("#RED#Could not create new instance of [", clazz, "]: ", e.getMessage());
         }
         return null;
     }

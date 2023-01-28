@@ -1,7 +1,7 @@
-package ml.windleaf.easylib.plugin;
+package ml.windleaf.easylib;
 
 import ml.windleaf.easylib.logging.PluginLogger;
-import ml.windleaf.easylib.register.RegisterManager;
+import ml.windleaf.easylib.registration.RegistrationManager;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -50,7 +50,7 @@ public abstract class EasyLib extends JavaPlugin {
         this.superConfig();
         // 必须执行 `superConfig` 方法，否则无法启动
         if (this.version == null || this.packagePath == null) {
-            logger.logConsole("&cNo config found, please set version and package in `superConfig` method!");
+            logger.logConsole("#RED#No config found, please set version and package in `superConfig` method!");
             throw new IllegalArgumentException();
         }
     }
@@ -64,6 +64,6 @@ public abstract class EasyLib extends JavaPlugin {
             getConfig().options().copyDefaults();
             saveDefaultConfig();
         } catch (IllegalArgumentException ignore) {}
-        new RegisterManager(this.packagePath);
+        RegistrationManager.init(this.packagePath);
     }
 }

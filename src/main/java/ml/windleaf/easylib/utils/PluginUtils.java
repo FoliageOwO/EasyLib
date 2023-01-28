@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 
-import static ml.windleaf.easylib.plugin.EasyLib.instance;
+import static ml.windleaf.easylib.EasyLib.instance;
 
 /**
  * 和插件相关的工具类

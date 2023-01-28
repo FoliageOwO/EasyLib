@@ -1,8 +1,7 @@
-package ml.windleaf.easylib.register;
+package ml.windleaf.easylib.registration;
 
 import ml.windleaf.easylib.interfaces.CommandInfo;
 import ml.windleaf.easylib.interfaces.ICommand;
-import ml.windleaf.easylib.utils.PluginUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventHandler;
@@ -42,9 +41,9 @@ public class CommandListener implements Listener {
     public void onTabCompleteEvent(@NotNull TabCompleteEvent e) {
         String[] list = e.getCompletions().toArray(new String[0]);
         String command = list[0];
-        RegisterManager.commands.keySet().forEach(cmd -> {
+        RegistrationManager.commands.keySet().forEach(cmd -> {
             if (Objects.equals(command, cmd)) {
-                List<String> result = RegisterManager.commands.get(cmd).onTabComplete(e.getSender(), list);
+                List<String> result = RegistrationManager.commands.get(cmd).onTabComplete(e.getSender(), list);
                 e.setCompletions(result);
             }
         });
@@ -60,13 +59,13 @@ public class CommandListener implements Listener {
         String cmd = args.get(0);
         args.remove(0);
         // 获取 `ICommand` 实例对象和 `CommandInfo` 对象
-        ICommand instance = RegisterManager.commands.get(cmd);
+        ICommand instance = RegistrationManager.commands.get(cmd);
         if (instance != null) {
             CommandInfo info = instance.getClass().getAnnotation(CommandInfo.class);
             // 判断权限并执行
             String permission = info.permission();
             if (sender.hasPermission(permission) || permission.equals("")) {
-                RegisterManager.commands.get(cmd).onCommand(sender, args);
+                RegistrationManager.commands.get(cmd).onCommand(sender, args);
             }
         }
     }

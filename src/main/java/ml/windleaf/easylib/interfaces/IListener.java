@@ -1,7 +1,7 @@
 package ml.windleaf.easylib.interfaces;
 
 import ml.windleaf.easylib.logging.PluginLogger;
-import ml.windleaf.easylib.plugin.EasyLib;
+import ml.windleaf.easylib.EasyLib;
 import org.bukkit.event.Listener;
 
 /**
