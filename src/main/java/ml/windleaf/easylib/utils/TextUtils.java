@@ -6,7 +6,6 @@ import org.bukkit.ChatColor;
 import java.util.*;
 import java.util.function.Supplier;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static org.bukkit.ChatColor.*;
@@ -24,7 +23,7 @@ public class TextUtils {
         put(BLUE, "蓝");
         put(DARK_AQUA, "深青");
         put(DARK_BLUE, "深蓝");
-        put(DARK_GRAY, "深灰"); // ??? - 我爱灰灰 - 6 - ♂ - 6
+        put(DARK_GRAY, "深灰");
         put(DARK_GREEN, "深绿");
         put(DARK_PURPLE, "深紫");
         put(DARK_RED, "深红");
@@ -46,8 +45,7 @@ public class TextUtils {
      */
     public static String translateColor(String string) {
         String result = string;
-        Pattern regex = Pattern.compile("#[A-Z_-]+#");
-        Matcher matcher = regex.matcher(result);
+        Matcher matcher = RegexUtils.getMatcher("#[A-Z_-]+#", result);
         while (matcher.find()) {
             String code = matcher.group();
             result = result.replaceFirst(
@@ -88,8 +86,8 @@ public class TextUtils {
     }
 
     /**
-     * 随机抽取队伍颜色
-     * @return 队伍颜色
+     * 随机抽取颜色
+     * @return 颜色
      */
     public static ChatColor randomColor() {
         Collections.shuffle(colors);
