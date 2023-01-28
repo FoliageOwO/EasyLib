@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import static ml.windleaf.easylib.EasyLib.logger;
+import static ml.windleaf.easylib.EasyLibPlugin.logger;
 import static org.reflections.scanners.Scanners.SubTypes;
 
 /**

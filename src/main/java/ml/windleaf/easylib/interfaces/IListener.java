@@ -1,6 +1,6 @@
 package ml.windleaf.easylib.interfaces;
 
-import ml.windleaf.easylib.EasyLib;
+import ml.windleaf.easylib.EasyLibPlugin;
 import ml.windleaf.easylib.logging.PluginLogger;
 import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
@@ -14,11 +14,11 @@ public interface IListener extends Listener {
      * 插件实例对象，可直接在子类中调用
      */
     @NotNull
-    EasyLib instance = EasyLib.instance;
+    EasyLibPlugin instance = EasyLibPlugin.instance;
 
     /**
      * 插件的日志记录器，可直接在子类中调用
      */
     @NotNull
-    PluginLogger logger = EasyLib.logger;
+    PluginLogger logger = EasyLibPlugin.logger;
 }

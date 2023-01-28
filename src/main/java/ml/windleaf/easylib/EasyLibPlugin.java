@@ -4,12 +4,15 @@ import ml.windleaf.easylib.logging.PluginLogger;
 import ml.windleaf.easylib.registration.RegistrationManager;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
 
 /**
  * 基本插件接口
  */
-public abstract class EasyLib extends JavaPlugin {
+public abstract class EasyLibPlugin extends JavaPlugin {
     /**
      * 插件的日志记录器
      */
@@ -18,7 +21,7 @@ public abstract class EasyLib extends JavaPlugin {
     /**
      * 插件实例对象
      */
-    public static EasyLib instance;
+    public static EasyLibPlugin instance;
 
     /**
      * 插件版本
@@ -50,6 +53,10 @@ public abstract class EasyLib extends JavaPlugin {
      */
     protected abstract void superConfig();
 
+    @NotNull
+    @Nls
+    protected abstract String[] getPluginMOTD();
+
     @Override
     public final void onLoad() {
         logger = new PluginLogger(this.getName());
@@ -65,6 +72,7 @@ public abstract class EasyLib extends JavaPlugin {
     public void onEnable() {
         instance = this;
         logger.setLoggerColor(this.loggerColor);
+        Arrays.stream(this.getPluginMOTD()).forEach(logger::logConsole);
         try {
             getConfig().options().copyDefaults();
             saveDefaultConfig();

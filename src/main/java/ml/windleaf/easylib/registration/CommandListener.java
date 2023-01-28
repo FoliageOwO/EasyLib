@@ -21,6 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
@@ -125,17 +126,17 @@ public class CommandListener implements Listener {
         List<Object> result = new ArrayList<>();
         kv.forEach((arg, type) -> {
             try {
-                result.add(new HashMap<Class<?>, Object>() {{
-                    put(String.class, arg);
-                    put(Character.class, arg.length() == 1 ? arg.toCharArray()[0] : null);
-                    put(Integer.class, Integer.parseInt(arg));
-                    put(Double.class, Double.parseDouble(arg));
-                    put(Float.class, Float.parseFloat(arg));
-                    put(Boolean.class, Boolean.parseBoolean(arg));
-                    put(List.class, Arrays.asList(arg.split(",")));
-                    put(ArrayList.class, Arrays.asList(arg.split(",")));
-                    put(Player.class, Bukkit.getPlayer(arg));
-                    put(World.class, Bukkit.getWorld(arg));
+                result.add(new HashMap<Class<?>, Function<String, Object>>() {{
+                    put(String.class, q -> arg);
+                    put(Character.class, q -> arg.length() == 1 ? arg.toCharArray()[0] : null);
+                    put(Integer.class, Integer::parseInt);
+                    put(Double.class, Double::parseDouble);
+                    put(Float.class, Float::parseFloat);
+                    put(Boolean.class, Boolean::parseBoolean);
+                    put(List.class, q -> Arrays.asList(arg.split(",")));
+                    put(ArrayList.class, q -> Arrays.asList(arg.split(",")));
+                    put(Player.class, Bukkit::getPlayer);
+                    put(World.class, Bukkit::getWorld);
                 }}.get(type));
             } catch (Exception ignore) {
                 result.add(null);

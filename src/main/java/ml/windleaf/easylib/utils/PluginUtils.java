@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 
-import static ml.windleaf.easylib.EasyLib.instance;
+import static ml.windleaf.easylib.EasyLibPlugin.instance;
 
 /**
  * 和插件相关的工具类
