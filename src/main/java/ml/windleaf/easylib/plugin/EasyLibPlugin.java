@@ -4,9 +4,8 @@ import ml.windleaf.easylib.logging.PluginLogger;
 import ml.windleaf.easylib.registration.RegistrationManager;
 import ml.windleaf.easylib.utils.PluginUtils;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.util.Arrays;
 
 /**
@@ -23,19 +22,32 @@ public abstract class EasyLibPlugin extends JavaPlugin {
      */
     public static EasyLibPlugin instance;
 
-    @NotNull
-    @Nls
-    protected abstract String[] getPluginMOTD();
+    /**
+     * 插件更新目录
+     */
+    public static File updateFolder = new File(PluginUtils.getWorkingPath(), "update");
+
+    /**
+     * 插件额外加载逻辑
+     */
+    protected abstract void onPluginLoad();
+
+    /**
+     * 插件额外卸载逻辑
+     */
+    protected abstract void onPluginUnload();
 
     @Override
     public void onEnable() {
         instance = this;
-        PluginInfo info = this.getClass().getAnnotation(PluginInfo.class);
-        logger = new PluginLogger(this.getName());
+        PluginInfo info = getClass().getAnnotation(PluginInfo.class);
+        logger = new PluginLogger(getName());
+        if (!updateFolder.exists()) updateFolder.mkdir();
         if (info != null) {
             logger.setLoggerColor(info.loggerColor());
             PluginUtils.checkUpdate(info.version(), info.repository());
-            Arrays.stream(this.getPluginMOTD()).forEach(logger::logConsole);
+            MOTD motd = getClass().getAnnotation(MOTD.class);
+            if (motd != null) Arrays.stream(motd.value()).forEach(logger::logConsole);
             try {
                 getConfig().options().copyDefaults();
                 saveDefaultConfig();
@@ -46,5 +58,12 @@ public abstract class EasyLibPlugin extends JavaPlugin {
             logger.logConsole("#RED#无法加载插件信息，请检查插件注解！");
             throw new IllegalArgumentException();
         }
+        onPluginLoad();
+    }
+
+    @Override
+    public void onDisable() {
+        File[] files = updateFolder.listFiles();
+        if (files != null) Arrays.stream(files).forEach(File::delete);
     }
 }

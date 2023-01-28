@@ -6,6 +6,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.annotation.*;
 
+/**
+ * 插件信息，用于标注插件的基本信息
+ */
 @Documented
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

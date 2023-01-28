@@ -24,8 +24,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 
-import static ml.windleaf.easylib.plugin.EasyLibPlugin.instance;
-import static ml.windleaf.easylib.plugin.EasyLibPlugin.logger;
+import static ml.windleaf.easylib.plugin.EasyLibPlugin.*;
 
 /**
  * 和插件相关的工具类
@@ -127,7 +126,6 @@ public class PluginUtils {
                             public void run() {
                                 try {
                                     InputStream is = downloadUrl.openStream();
-                                    File updateFolder = new File(getWorkingPath(), "update");
                                     if (!updateFolder.exists()) updateFolder.mkdir();
                                     Path path = new File(updateFolder, name).toPath();
                                     Files.copy(is, path, StandardCopyOption.REPLACE_EXISTING);
