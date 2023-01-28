@@ -94,7 +94,7 @@ public class CommandListener implements Listener {
                     try {
                         List<Object> specialArgs = parseArgs(args, Arrays.asList(paramTypes));
                         if (specialArgs != null) {
-                            method.invoke(instance, specialArgs.toArray());
+                            method.invoke(instance, sender, specialArgs.toArray());
                             error = false;
                         }
                     } catch (Exception ignore) {
