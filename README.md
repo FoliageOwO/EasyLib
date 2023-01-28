@@ -12,6 +12,8 @@
 ---
 
 ## 使用方法
+**版本号可为 `master-SNAPSHOT` 表示最新构建版**
+
 ### Gradle
 ```groovy
 repositories {
@@ -19,7 +21,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.WindLeaf233:EasyLib:1.0.3' // 最后的版本号可为 `master-SNAPSHOT` 表示最新构建版
+    implementation 'com.github.WindLeaf233:EasyLib:1.0.3'
 }
 ```
 
