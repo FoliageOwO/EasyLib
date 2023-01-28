@@ -129,6 +129,7 @@ public class CommandListener implements Listener {
                     put(String.class, arg);
                     put(Character.class, arg.length() == 1 ? arg.toCharArray()[0] : null);
                     put(Integer.class, Integer.parseInt(arg));
+                    put(Double.class, Double.parseDouble(arg));
                     put(Float.class, Float.parseFloat(arg));
                     put(Boolean.class, Boolean.parseBoolean(arg));
                     put(List.class, Arrays.asList(arg.split(",")));
