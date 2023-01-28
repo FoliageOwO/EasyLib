@@ -31,7 +31,7 @@ public interface ICommand {
      * @param sender 发送命令的实体
      * @param args   命令的参数
      */
-    default void onCommand(@NotNull CommandSender sender, @NotNull List<String> args) {
+    default void onCommand(CommandSender sender, List<String> args) {
     }
 
     /**
@@ -42,7 +42,7 @@ public interface ICommand {
      * @return 补全的参数
      */
     @Nullable
-    default List<String> onTabComplete(@NotNull CommandSender sender, @NotNull String[] args) {
+    default List<String> onTabComplete(CommandSender sender, String[] args) {
         return null;
     }
 }
