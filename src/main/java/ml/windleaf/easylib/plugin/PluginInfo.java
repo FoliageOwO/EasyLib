@@ -36,4 +36,17 @@ public @interface PluginInfo {
      */
     @NotNull
     ChatColor loggerColor() default ChatColor.GRAY;
+
+    /**
+     * 插件的 `GitHub` 地址, 用于自动更新
+     * <p>
+     * 如果不填则表示不自动更新
+     * <p>
+     * 如果启用, `GitHub` 的仓库必须要使用 `1.2.0` 类似的版本发布版本
+     *
+     * @exmaple WindLeaf233/ExampleMod
+     */
+    @NotNull
+    @Nls
+    String repository() default "";
 }

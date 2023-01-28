@@ -53,7 +53,7 @@ public class ClassUtils {
                 return constructor.newInstance(args);
             }
         } catch (Exception e) {
-            logger.logConsole("#RED#Could not create new instance of [", clazz, "]: ", e.getMessage());
+            logger.logConsole("#RED#无法创建类 [", clazz, "] 的对象实例：", e.getMessage());
         }
         return null;
     }

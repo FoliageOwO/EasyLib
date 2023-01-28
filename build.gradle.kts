@@ -15,6 +15,7 @@ repositories {
 
 dependencies {
     implementation("org.reflections:reflections:0.10.2")
+    implementation("com.alibaba.fastjson2:fastjson2:2.0.23")
     compileOnly("org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT")
 }
 

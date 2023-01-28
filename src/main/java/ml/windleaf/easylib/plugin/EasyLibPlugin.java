@@ -2,6 +2,7 @@ package ml.windleaf.easylib.plugin;
 
 import ml.windleaf.easylib.logging.PluginLogger;
 import ml.windleaf.easylib.registration.RegistrationManager;
+import ml.windleaf.easylib.utils.PluginUtils;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
@@ -33,6 +34,7 @@ public abstract class EasyLibPlugin extends JavaPlugin {
         logger = new PluginLogger(this.getName());
         if (info != null) {
             logger.setLoggerColor(info.loggerColor());
+            PluginUtils.checkUpdate(info.version(), info.repository());
             Arrays.stream(this.getPluginMOTD()).forEach(logger::logConsole);
             try {
                 getConfig().options().copyDefaults();
@@ -41,7 +43,7 @@ public abstract class EasyLibPlugin extends JavaPlugin {
             }
             RegistrationManager.init(info.packagePath());
         } else {
-            logger.logConsole("#RED#Could not load plugin info, please check the annotation!");
+            logger.logConsole("#RED#无法加载插件信息，请检查插件注解！");
             throw new IllegalArgumentException();
         }
     }

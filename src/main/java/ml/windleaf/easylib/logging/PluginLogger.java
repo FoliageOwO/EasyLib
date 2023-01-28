@@ -95,7 +95,7 @@ public class PluginLogger {
      */
     public void logConsole(@Nullable Object... any) {
         StringBuilder sb = new StringBuilder();
-        Arrays.asList(any).forEach(obj -> sb.append(TextUtils.safeFormat(" %s ", obj)));
+        Arrays.asList(any).forEach(obj -> sb.append(TextUtils.safeFormat("%s", obj)));
         Bukkit.getConsoleSender().sendMessage(String.format("%s%s%s",
                 String.format(this.nameFormat.getContent(), ChatColorUtils.getTextColored(this.name, ChatColorUtils.getReverseColor(this.color))),
                 this.separator.getContent(),
