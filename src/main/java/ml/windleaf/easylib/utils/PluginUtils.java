@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
+import java.util.zip.ZipOutputStream;
 
 import static ml.windleaf.easylib.plugin.EasyLibPlugin.*;
 
@@ -120,6 +122,7 @@ public class PluginUtils {
                 for (Map assetMap : assets) {
                     String name = (String) assetMap.get("name");
                     if (!name.contains("source") && !name.contains("original") && name.contains(".jar")) {
+                        logger.logConsole("#GREEN#正在下载最新版插件文件...");
                         URL downloadUrl = new URL((String) assetMap.get("url"));
                         new BukkitRunnable() {
                             @Override
@@ -127,10 +130,21 @@ public class PluginUtils {
                                 try {
                                     InputStream is = downloadUrl.openStream();
                                     if (!updateFolder.exists()) updateFolder.mkdir();
-                                    Path path = new File(updateFolder, name).toPath();
+                                    Path path = (new File(updateFolder, name)).toPath();
                                     Files.copy(is, path, StandardCopyOption.REPLACE_EXISTING);
+                                    // 尝试替换
+                                    try {
+                                        String outdatedFilePath = instance.getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+                                        File outdatedFile = new File(outdatedFilePath);
+                                        new ZipOutputStream(new FileOutputStream(outdatedFile)).close();
+                                        outdatedFile.delete();
+                                        Files.copy(path, (new File(getWorkingPath())).getParentFile().toPath(), StandardCopyOption.REPLACE_EXISTING);
+                                        logger.logConsole("#GREEN#更新完成，请重启服务器或重载！");
+                                    } catch (Exception ioe) {
+                                        logger.logConsole("#RED#替换文件失败，请手动替换：", ioe.getMessage());
+                                    }
                                 } catch (Exception error) {
-                                    logger.logConsole("#RED#无法下载最新版插件文件！");
+                                    logger.logConsole("#RED#无法下载最新版插件文件：", error.getMessage());
                                 }
                             }
                         }.runTaskLaterAsynchronously(instance, 0);
@@ -139,7 +153,7 @@ public class PluginUtils {
                 }
             }
         } catch (Exception error) {
-            logger.logConsole("#RED#无法获取插件最新版本（15秒超时），请检查网络连接！");
+            logger.logConsole("#RED#无法获取插件最新版本（15秒超时），请检查网络连接：", error);
         }
     }
 }
