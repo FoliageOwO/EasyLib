@@ -125,7 +125,7 @@ public class CommandListener implements Listener {
         List<Object> result = new ArrayList<>();
         kv.forEach((arg, type) -> {
             try {
-                result.add(new HashMap<>() {{
+                result.add(new HashMap<Class<?>, Object>() {{
                     put(String.class, arg);
                     put(Character.class, arg.length() == 1 ? arg.toCharArray()[0] : null);
                     put(Integer.class, Integer.parseInt(arg));
