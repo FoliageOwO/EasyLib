@@ -22,11 +22,11 @@ public interface ICommand {
     PluginLogger logger = EasyLib.logger;
 
     /**
-     * 命令处理方法
+     * 普通命令处理方法
      * @param sender 发送命令的实体
      * @param args 命令的参数
      */
-    void onCommand(@NotNull CommandSender sender, @NotNull List<String> args);
+    default void onCommand(@NotNull CommandSender sender, @NotNull List<String> args) {};
 
     /**
      * 命令补全方法

@@ -6,7 +6,7 @@ import org.bukkit.event.Listener;
 
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Function;
+import java.util.function.Predicate;
 
 import static ml.windleaf.easylib.EasyLib.instance;
 
@@ -30,14 +30,14 @@ public class PluginUtils {
     /**
      * 根据所给的条件在集合中找到对应的元素
      * @param collection 集合
-     * @param function 判断匿名函数
+     * @param predicate 判断匿名函数
      * @return 元素，不存在则为 `null`
      * @param <T> 元素泛型
      */
-    public static <T> T find(Collection<T> collection, Function<T, Boolean> function) {
+    public static <T> T find(Collection<T> collection, Predicate<T> predicate) {
         AtomicReference<T> result = new AtomicReference<>();
         collection.forEach(any -> {
-            if (function.apply(any)) result.set(any);
+            if (predicate.test(any)) result.set(any);
         });
         return result.get();
     }
