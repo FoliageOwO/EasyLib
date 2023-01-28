@@ -6,46 +6,60 @@ import ml.windleaf.easylib.utils.ChatColorUtils;
 import ml.windleaf.easylib.utils.TextUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.jetbrains.annotations.Nls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 
 /**
  * 插件日志记录器
  */
+@SuppressWarnings("unused")
 public class PluginLogger {
     /**
      * 插件的名字
+     *
      * @example TestPlugin
      */
+    @NotNull
+    @Nls
     private final String name;
 
     /**
      * 日志记录器格式 | 插件的名字
-     * @default {@link NameFormat.SQUARE_BRACKETS}
+     *
+     * @default NameFormat.SQUARE_BRACKETS
      * @example §lTestPlugin
      * @example [TestPlugin]
      */
+    @NotNull
     private final NameFormat nameFormat;
 
     /**
      * 日志记录器格式 | 名字和信息之间的分隔符
-     * @default {@link Separator.EMPTY}
+     *
+     * @default Separator.EMPTY
      * @example §l |
-     * @example  >>>
+     * @example >>>
      */
+    @NotNull
     private final Separator separator;
 
     /**
      * 插件的名字颜色
-     * @default {@link ChatColor.WHITE}
+     *
+     * @default ChatColor.WHITE
      */
+    @NotNull
     private ChatColor color = ChatColor.WHITE;
 
     /**
      * 初始化一个日志记录器
+     *
      * @param name 插件名
      */
-    public PluginLogger(String name) {
+    public PluginLogger(@NotNull String name) {
         this.name = name;
         this.nameFormat = NameFormat.SQUARE_BRACKETS;
         this.separator = Separator.EMPTY;
@@ -53,11 +67,12 @@ public class PluginLogger {
 
     /**
      * 初始化一个日志记录器，自定义格式
-     * @param name 插件名
+     *
+     * @param name       插件名
      * @param nameFormat 日志记录器格式 | 插件的名字
-     * @param separator 日志记录器格式 | 名字和信息之间的分隔符
+     * @param separator  日志记录器格式 | 名字和信息之间的分隔符
      */
-    public PluginLogger(String name, NameFormat nameFormat, Separator separator) {
+    public PluginLogger(@NotNull String name, @NotNull NameFormat nameFormat, @NotNull Separator separator) {
         this.name = name;
         this.nameFormat = nameFormat;
         this.separator = separator;
@@ -65,20 +80,22 @@ public class PluginLogger {
 
     /**
      * 手动设置插件的名字的颜色
+     *
      * @param color 颜色
      * @see ChatColor
      */
-    public void setLoggerColor(ChatColor color) {
+    public void setLoggerColor(@NotNull ChatColor color) {
         this.color = color;
     }
 
     /**
      * 向控制台输出消息
+     *
      * @param any 消息或任何对象
      */
-    public void logConsole(Object... any) {
+    public void logConsole(@Nullable Object... any) {
         StringBuilder sb = new StringBuilder();
-        Arrays.asList(any).forEach(obj -> sb.append(String.format(" %s ", obj.toString())));
+        Arrays.asList(any).forEach(obj -> sb.append(TextUtils.safeFormat(" %s ", obj)));
         Bukkit.getConsoleSender().sendMessage(String.format("%s%s%s",
                 String.format(this.nameFormat.getContent(), ChatColorUtils.getTextColored(this.name, ChatColorUtils.getReverseColor(this.color))),
                 this.separator.getContent(),

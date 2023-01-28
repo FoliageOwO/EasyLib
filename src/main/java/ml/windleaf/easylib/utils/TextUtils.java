@@ -2,48 +2,29 @@ package ml.windleaf.easylib.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.jetbrains.annotations.Nls;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
-import java.util.function.Supplier;
+import java.util.Arrays;
 import java.util.regex.Matcher;
-import java.util.stream.Collectors;
-
-import static org.bukkit.ChatColor.*;
 
 /**
  * 和文本、颜色相关的工具类
  */
+@SuppressWarnings("unused")
 public class TextUtils {
-    // 存放颜色的列表，用于随机颜色生成
-    private static final ArrayList<ChatColor> colors = new ArrayList<>();
-    // 存放颜色代码对应的中文翻译
-    private static final HashMap<ChatColor, String> colorsNameMap = new HashMap<ChatColor, String>() {{
-        put(AQUA, "青");
-        put(BLACK, "黑");
-        put(BLUE, "蓝");
-        put(DARK_AQUA, "深青");
-        put(DARK_BLUE, "深蓝");
-        put(DARK_GRAY, "深灰");
-        put(DARK_GREEN, "深绿");
-        put(DARK_PURPLE, "深紫");
-        put(DARK_RED, "深红");
-        put(GOLD, "金");
-        put(GRAY, "灰");
-        put(GREEN, "绿");
-        put(LIGHT_PURPLE, "浅紫");
-        put(RED, "红");
-        put(WHITE, "白");
-        put(YELLOW, "黄");
-    }};
-
     /**
      * 将带特殊颜色代码的文本转为带颜色代码的文本
      * <p>换行
      * 例如："#RED#你输了！" -> "§c你输了！"
+     *
      * @param string 带特殊颜色代码的文本
      * @return 转换后的文本
      */
-    public static String translateColor(String string) {
+    @NotNull
+    @Nls
+    public static String translateColor(@NotNull @Nls String string) {
         String result = string;
         Matcher matcher = RegexUtils.getMatcher("#[A-Z_-]+#", result);
         while (matcher.find()) {
@@ -60,51 +41,36 @@ public class TextUtils {
      * 将带特殊颜色代码的文本转为带颜色代码的文本 (带占位符)
      * <p>
      * 例如："#RED#你输了！" -> "§c你输了！"
+     *
      * @param string 带特殊颜色代码的文本
-     * @param args 占位符替换
+     * @param args   占位符替换
      * @return 转换后的文本
      */
-    public static String translateColor(String string, Object... args) {
-        return translateColor(String.format(string, args));
+    @NotNull
+    @Nls
+    public static String translateColor(@NotNull @Nls String string, @Nullable Object... args) {
+        return translateColor(safeFormat(string, args));
     }
 
     /**
      * 全服公告消息(带占位符)
+     *
      * @param message 要公告的消息
-     * @param args 占位符替换
+     * @param args    占位符替换
      */
-    public static void broadcast(String message, Object... args) {
+    public static void broadcast(@NotNull @Nls String message, @Nullable Object... args) {
         Bukkit.getOnlinePlayers().forEach(it -> PlayerUtils.send(it, message, args));
     }
 
     /**
-     * 重设颜色
+     * 安全格式化文本, 将为 `null` 的参数化为 "null" 字符串
+     *
+     * @param string 要格式化的文本
+     * @param args   参数
+     * @return 格式化后的文本
      */
-    private static void resetColors() {
-        colors.clear();
-        colors.addAll(Arrays.stream(values()).filter(colorsNameMap::containsKey).collect(Collectors.toList()));
-    }
-
-    /**
-     * 随机抽取颜色
-     * @return 颜色
-     */
-    public static ChatColor randomColor() {
-        Collections.shuffle(colors);
-        Optional<ChatColor> random = colors.stream().findFirst();
-        Supplier<ChatColor> getter = random.isPresent() ? random::get : () -> {
-            resetColors();
-            return randomColor();
-        };
-        return getter.get();
-    }
-
-    /**
-     * 将颜色代码转换成中文文字
-     * @param color 颜色代码
-     * @return 对应中文文字
-     */
-    public static String getColorName(ChatColor color) {
-        return colorsNameMap.getOrDefault(color, "未知");
+    @NotNull
+    public static String safeFormat(@NotNull String string, @Nullable Object... args) {
+        return String.format(string, Arrays.stream(args).map(arg -> arg == null ? "null" : arg.toString()));
     }
 }

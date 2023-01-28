@@ -15,7 +15,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.server.ServerCommandEvent;
 import org.bukkit.event.server.TabCompleteEvent;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Method;
 import java.util.*;
@@ -45,16 +47,17 @@ public class CommandListener implements Listener {
         String cmd = PluginUtils.find(RegistrationManager.commands.keySet(), it -> Objects.equals(command, it));
         if (cmd != null) {
             List<String> result = RegistrationManager.commands.get(cmd).onTabComplete(e.getSender(), list);
-            e.setCompletions(result);
+            if (result != null) e.setCompletions(result);
         }
     }
 
     /**
      * 将命令交给命令对应的 `ICommand` 实例对象处理
+     *
      * @param string 命令字符串
      * @param sender 发送命令的实体
      */
-    private void handleCommand(@NotNull String string, @NotNull CommandSender sender) {
+    private void handleCommand(@NotNull @Nls String string, @NotNull CommandSender sender) {
         CommandParserResult result = parseCommand(string);
         if (result != null) {
             // 获取 `ICommand` 实例对象和 `CommandInfo` 对象
@@ -72,15 +75,16 @@ public class CommandListener implements Listener {
 
     /**
      * 解析 `ICommand` 对象的特殊 `onCommand` 方法
-     * @param args 参数列表
+     *
+     * @param args     参数列表
      * @param instance `ICommand` 对象
-     * @param sender 命令发送的实体
+     * @param sender   命令发送的实体
      */
-    private void parseOnCommand(List<String> args, ICommand instance, CommandSender sender) {
+    private void parseOnCommand(@NotNull List<String> args, @NotNull ICommand instance, @NotNull CommandSender sender) {
         Method[] methods = instance.getClass().getDeclaredMethods();
         boolean triggered = false;
         boolean error = false;
-        for (Method method: methods) {
+        for (Method method : methods) {
             if (method.getName().equals("onCommand")) {
                 Class<?>[] paramTypes = method.getParameterTypes();
                 if (paramTypes.length > 2) {
@@ -104,11 +108,13 @@ public class CommandListener implements Listener {
 
     /**
      * 根据特殊 `onCommand` 方法的参数类型解析参数为类型对象
-     * @param args 参数列表
+     *
+     * @param args       参数列表
      * @param paramTypes 方法的参数类型列表
      * @return 解析后的类型对象列表
      */
-    private List<Object> parseArgs(List<String> args, List<Class<?>> paramTypes) {
+    @Nullable
+    private List<Object> parseArgs(@NotNull List<String> args, @NotNull List<Class<?>> paramTypes) {
         Set<String> pArgs = new HashSet<>(args);
         if (args.size() != paramTypes.size() || pArgs.size() != args.size()) return null;
         Map<String, Class<?>> kv = Maps.asMap(pArgs, s -> {
@@ -139,16 +145,18 @@ public class CommandListener implements Listener {
 
     /**
      * 将命令字符串解析为 `CommandParserResult` 对象
+     *
      * @param string 命令字符串
      * @return 解析后的 `CommandParserResult` 对象
      * @see CommandParserResult
      */
-    private CommandParserResult parseCommand(String string) {
+    @Nullable
+    private CommandParserResult parseCommand(@NotNull @Nls String string) {
         String command;
         // 匹配命令文本
         Matcher commandMatcher = RegexUtils.getMatcher("\\/?[a-zA-Z0-9_-]+", string);
         if (commandMatcher.find()) {
-            command = commandMatcher.group().trim();
+            command = commandMatcher.group().trim().replaceFirst("/", "");
             string = string.replace(command, "").trim();
         } else return null;
         // 匹配带引号的参数 并在空格之间加入特殊字符 以便分割
@@ -158,7 +166,7 @@ public class CommandListener implements Listener {
             String group = quotedArgsMatcher.group().trim();
             String copy = group;
             copy = copy.replaceAll("\"", "");
-            copy = copy.replace(' ' , c);
+            copy = copy.replace(' ', c);
             string = string.replace(group, copy).trim();
         }
         // 匹配所有参数
@@ -169,10 +177,24 @@ public class CommandListener implements Listener {
 
 
     private static class CommandParserResult {
+        /**
+         * 命令文本
+         *
+         * @example command
+         */
+        @NotNull
+        @Nls
         public final String command;
+
+        /**
+         * 命令参数
+         *
+         * @example ["hello", "world", "ni hao"]
+         */
+        @NotNull
         public final ArrayList<String> args;
 
-        public CommandParserResult(String command, ArrayList<String> args) {
+        public CommandParserResult(@NotNull @Nls String command, @NotNull ArrayList<String> args) {
             this.command = command;
             this.args = args;
         }
