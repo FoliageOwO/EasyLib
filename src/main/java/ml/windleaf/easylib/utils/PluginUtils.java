@@ -119,7 +119,7 @@ public class PluginUtils {
                 List<Map> assets = json.getList("assets", Map.class);
                 for (Map assetMap : assets) {
                     String name = (String) assetMap.get("name");
-                    if (!name.contains("sources") && name.contains(".jar")) {
+                    if (!name.contains("source") && !name.contains("original") && name.contains(".jar")) {
                         URL downloadUrl = new URL((String) assetMap.get("url"));
                         new BukkitRunnable() {
                             @Override
