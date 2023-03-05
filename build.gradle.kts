@@ -29,12 +29,12 @@ fun compare(s: String, vararg names: String): Boolean {
 }
 
 tasks.jar {
-    val dependencies = configurations.compileClasspath.get().find {
+    val dependencies = configurations.compileClasspath.get().filter {
         compare(it.name,
             "reflections",
             "fastjson2",
             "commons-io")
-    }
+    }.map(::zipTree)
     from(dependencies)
 }
 
