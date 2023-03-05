@@ -15,7 +15,7 @@ public abstract class EasyLibPlugin extends JavaPlugin {
     /**
      * 插件的日志记录器
      */
-    public static PluginLogger logger;
+    public static PluginLogger pLogger;
 
     /**
      * 插件实例对象
@@ -41,13 +41,13 @@ public abstract class EasyLibPlugin extends JavaPlugin {
     public void onEnable() {
         instance = this;
         PluginInfo info = getClass().getAnnotation(PluginInfo.class);
-        logger = new PluginLogger(getName());
+        pLogger = new PluginLogger(getName());
         if (!updateFolder.exists()) updateFolder.mkdir();
         if (info != null) {
-            logger.setLoggerColor(info.loggerColor());
+            pLogger.setLoggerColor(info.loggerColor());
             PluginUtils.checkUpdate(info.version(), info.repository());
             MOTD motd = getClass().getAnnotation(MOTD.class);
-            if (motd != null) Arrays.stream(motd.value()).forEach(logger::logConsole);
+            if (motd != null) Arrays.stream(motd.value()).forEach(pLogger::logConsole);
             try {
                 getConfig().options().copyDefaults();
                 saveDefaultConfig();
@@ -55,7 +55,7 @@ public abstract class EasyLibPlugin extends JavaPlugin {
             }
             RegistrationManager.init(info.packagePath());
         } else {
-            logger.logConsole("#RED#无法加载插件信息，请检查插件注解！");
+            pLogger.logConsole("#RED#No plugin info found, please check the annotation!");
             throw new IllegalArgumentException();
         }
         onPluginLoad();
