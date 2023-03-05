@@ -25,7 +25,7 @@ public abstract class EasyLibPlugin extends JavaPlugin {
     /**
      * 插件更新目录
      */
-    public static File updateFolder = new File(PluginUtils.getWorkingPath(), "update");
+    public static File updateFolder;
 
     /**
      * 插件额外加载逻辑
@@ -42,6 +42,7 @@ public abstract class EasyLibPlugin extends JavaPlugin {
         instance = this;
         PluginInfo info = getClass().getAnnotation(PluginInfo.class);
         pLogger = new PluginLogger(getName());
+        updateFolder = new File(PluginUtils.getWorkingPath(), "update");
         if (!updateFolder.exists()) updateFolder.mkdir();
         if (info != null) {
             pLogger.setLoggerColor(info.loggerColor());
