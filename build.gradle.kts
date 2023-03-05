@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.support.delegates.ProjectDelegate
+
 plugins {
     id("java")
     id("maven-publish")
@@ -29,13 +31,9 @@ fun compare(s: String, vararg names: String): Boolean {
 }
 
 tasks.jar {
-    val dependencies = configurations.compileClasspath.get().filter {
-        compare(it.name,
-            "reflections",
-            "fastjson2",
-            "commons-io")
-    }.map(::zipTree)
+    val dependencies = configurations.compileClasspath.get().map(::zipTree)
     from(dependencies)
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 allprojects {
