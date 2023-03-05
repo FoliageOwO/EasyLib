@@ -2,6 +2,7 @@ package ml.windleaf.easylib.utils;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
@@ -17,14 +18,12 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
-import java.util.zip.ZipOutputStream;
 
 import static ml.windleaf.easylib.plugin.EasyLibPlugin.*;
 
@@ -116,13 +115,13 @@ public class PluginUtils {
             String parsedTagName = tagName.replace(".", "");
             // 判断是否是最新版
             if (Integer.parseInt(parsedTagName) > Integer.parseInt(parsedVersion)) {
-                logger.logConsole("#GREEN#发现新版本：", tagName);
+                pLogger.logConsole("#GREEN#Found new version: ", tagName);
                 // 下载最新版
                 List<Map> assets = json.getList("assets", Map.class);
                 for (Map assetMap : assets) {
                     String name = (String) assetMap.get("name");
                     if (!name.contains("source") && !name.contains("original") && name.contains(".jar")) {
-                        logger.logConsole("#GREEN#正在下载最新版插件文件...");
+                        pLogger.logConsole("#GREEN#Downloading the latest plugin file...");
                         URL downloadUrl = new URL((String) assetMap.get("url"));
                         new BukkitRunnable() {
                             @Override
@@ -130,21 +129,21 @@ public class PluginUtils {
                                 try {
                                     InputStream is = downloadUrl.openStream();
                                     if (!updateFolder.exists()) updateFolder.mkdir();
-                                    Path path = (new File(updateFolder, name)).toPath();
-                                    Files.copy(is, path, StandardCopyOption.REPLACE_EXISTING);
+                                    File src = new File(updateFolder, name);
+                                    Files.copy(is, src.toPath(), StandardCopyOption.REPLACE_EXISTING);
                                     // 尝试替换
                                     try {
                                         String outdatedFilePath = instance.getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
                                         File outdatedFile = new File(outdatedFilePath);
-                                        new ZipOutputStream(new FileOutputStream(outdatedFile)).close();
-                                        outdatedFile.delete();
-                                        Files.copy(path, (new File(getWorkingPath())).getParentFile().toPath(), StandardCopyOption.REPLACE_EXISTING);
-                                        logger.logConsole("#GREEN#更新完成，请重启服务器或重载！");
+                                        FileOutputStream fos = new FileOutputStream(outdatedFile, false);
+                                        FileUtils.copyFile(outdatedFile, fos);
+                                        fos.close();
+                                        pLogger.logConsole("#GREEN#Successfully updated plugin, please restart or reload server!");
                                     } catch (Exception ioe) {
-                                        logger.logConsole("#RED#替换文件失败，请手动替换：", ioe.getMessage());
+                                        pLogger.logConsole("#RED#Could not replace file, please replace it manually: ", ioe.getMessage());
                                     }
                                 } catch (Exception error) {
-                                    logger.logConsole("#RED#无法下载最新版插件文件：", error.getMessage());
+                                    pLogger.logConsole("#RED#Could not download the latest plugin file: ", error.getMessage());
                                 }
                             }
                         }.runTaskLaterAsynchronously(instance, 0);
@@ -153,7 +152,7 @@ public class PluginUtils {
                 }
             }
         } catch (Exception error) {
-            logger.logConsole("#RED#无法获取插件最新版本（15秒超时），请检查网络连接：", error);
+            pLogger.logConsole("#RED#Could not get the lastest version of plugin (15s timed out), please check the network connection: ", error);
         }
     }
 }

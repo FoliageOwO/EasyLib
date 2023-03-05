@@ -42,3 +42,8 @@ dependencies {
     </dependency>
 </dependencies>
 ```
+
+## TODOs
+* 添加国际化
+* 多个 `EasyLibPlugin` 实例兼容性
+* 优化更新时插件名提及

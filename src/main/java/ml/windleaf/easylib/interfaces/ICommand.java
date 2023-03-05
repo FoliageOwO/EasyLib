@@ -23,7 +23,7 @@ public interface ICommand {
      * 插件的日志记录器，可直接在子类中调用
      */
     @NotNull
-    PluginLogger logger = EasyLibPlugin.logger;
+    PluginLogger pLogger = EasyLibPlugin.pLogger;
 
     /**
      * 普通命令处理方法

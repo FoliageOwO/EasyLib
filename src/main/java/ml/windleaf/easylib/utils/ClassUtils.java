@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import static ml.windleaf.easylib.plugin.EasyLibPlugin.logger;
+import static ml.windleaf.easylib.plugin.EasyLibPlugin.pLogger;
 import static org.reflections.scanners.Scanners.SubTypes;
 
 /**
@@ -53,7 +53,7 @@ public class ClassUtils {
                 return constructor.newInstance(args);
             }
         } catch (Exception e) {
-            logger.logConsole("#RED#无法创建类 [", clazz, "] 的对象实例：", e.getMessage());
+            pLogger.logConsole("#RED#Internal Error: Could not create the instance of [", clazz, "]:", e.getMessage());
         }
         return null;
     }
