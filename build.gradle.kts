@@ -20,6 +20,24 @@ dependencies {
     implementation("commons-io:commons-io:2.11.0")
 }
 
+fun compare(s: String, vararg names: String): Boolean {
+    var result = false
+    names.forEach {
+        if (s.contains(it)) result = true
+    }
+    return result
+}
+
+tasks.jar {
+    val dependencies = configurations.compileClasspath.get().find {
+        compare(it.name,
+            "reflections",
+            "fastjson2",
+            "commons-io")
+    }
+    from(dependencies)
+}
+
 allprojects {
     apply(plugin = "java")
     apply(plugin = "java-library")
