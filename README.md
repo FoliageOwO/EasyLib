@@ -47,3 +47,5 @@ dependencies {
 * 添加国际化
 * 多个 `EasyLibPlugin` 实例兼容性
 * 优化更新时插件名提及
+* 修复打包问题
+* 修改为 `Paper/Spigot` 插件型，便于安装和导入

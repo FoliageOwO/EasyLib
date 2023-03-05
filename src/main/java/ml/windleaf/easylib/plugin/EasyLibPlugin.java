@@ -48,7 +48,11 @@ public abstract class EasyLibPlugin extends JavaPlugin {
             pLogger.setLoggerColor(info.loggerColor());
             PluginUtils.checkUpdate(info.version(), info.repository());
             MOTD motd = getClass().getAnnotation(MOTD.class);
-            if (motd != null) Arrays.stream(motd.value()).forEach(pLogger::logConsole);
+            if (motd != null) {
+                for (String motdString : motd.value()) {
+                    pLogger.logConsole(motdString);
+                }
+            }
             try {
                 getConfig().options().copyDefaults();
                 saveDefaultConfig();
